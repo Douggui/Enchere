@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Auction index{% endblock %}
+
+{% block body %}
+    <h1>Auction index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Price</th>
+                <th>DateOpen</th>
+                <th>DateClose</th>
+                <th>CreatedAt</th>
+                <th>Image</th>
+                <th>Status</th>
+                <th>Slug</th>
+                <th>UpdatedAt</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for auction in auctions %}
+            <tr>
+                <td>{{ auction.id }}</td>
+                <td>{{ auction.price }}</td>
+                <td>{{ auction.dateOpen ? auction.dateOpen|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ auction.dateClose ? auction.dateClose|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ auction.createdAt ? auction.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ auction.image }}</td>
+                <td>{{ auction.status.value }}</td>
+                <td>{{ auction.slug }}</td>
+                <td>{{ auction.UpdatedAt ? auction.UpdatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('app_auction_show', {'id': auction.id}) }}">show</a>
+                    <a href="{{ path('app_auction_edit', {'id': auction.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="10">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_auction_new') }}">Create new</a>
+{% endblock %}

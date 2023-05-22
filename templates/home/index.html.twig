@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil{% endblock %}
+
+{% block body %}
+
+    <div class="container mt-5 ">
+         <h1 class="text-center mb-3">{{ "title"|trans }}</h1>
+        <div class="row row-cols-md-3 row-cols-lg-4  row-cols-sm-2 gy-5 row-cols-1 auctions" id="auctions" {{ turbo_stream_listen('App\\Entity\\Auction') }}>
+            {% for auction in auctions %}
+            
+            {% include "components/auction.html.twig" with {'auction' : auction } %}
+            
+            {% endfor %}
+        </div>
+    
+    </div>
+   <div class="toast-container">
+       
+    </div>
+    {% block javascripts %}
+        {{parent()}}
+        {{ encore_entry_script_tags('auctions') }}
+    {% endblock %}
+    
+{% endblock %}

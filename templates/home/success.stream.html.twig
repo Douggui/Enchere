@@ -1,0 +1,24 @@
+<turbo-stream action="update" target="info-auction-{{auction.id}}">
+    <template>
+        <p class="text-info ms-3" >Vous avez enchérer pour {{((auction.price)/100)|format_currency('EUR')}}</p>
+        <div class="position-fixed top-0 end-0 p-3" style="z-index: 11">
+            <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="toast-header d-flrx justify-content-end">
+                
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+                <div class="toast-body text-success">
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-check-circle-fill" viewBox="0 0 16 16">
+                    <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
+                </svg>
+                Vous avez enchérer pour {{((auction.price)/100)|format_currency('EUR')}}
+                </div>
+            </div>
+        </div>
+    </template>
+</turbo-stream>
+<turbo-stream action="update" target="price-{{auction.id}}">
+    <template>
+        <p class="card-text">{{((auction.price)/100)|format_currency('EUR')}}</p>
+    </template>
+</turbo-stream>

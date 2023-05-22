@@ -1,0 +1,42 @@
+
+
+{% if auction.status.name is same as 'Visible' %}
+<div id="auction-{{auction.id}}" >
+   
+    <div class="card" {% if remove is defined %} style="background-color:lightgrey;" {% endif %}>
+        {% if remove is not defined %}
+        <img src="{{asset('uploads/'~ auction.image)}}" class="card-img-top" alt="{{auction.title}}">
+        {% endif %}
+        <div class="card-body">
+            <p><strong> {{auction.title}} </strong></p>
+            <p class="card-text">{{auction.description|raw}}</p>
+            <p>date d'ouverture : {{auction.dateOpen|format_datetime(locale='fr')}}</p>
+            <p>Mis à jour le {{auction.updatedAt|format_datetime(locale='fr')}}</p>
+            <p class="card-text price" id='price-{{auction.id}}'>{{((auction.price)/100)|format_currency('EUR')}}</p>
+        </div>
+        
+        
+        <form action="{{path('app_raise',{id:auction.id})}}" method="POST" data-turbo=true>
+            {% if remove is not defined %}
+                <div class="mb-3 row justify-content-center gx-2">
+                    <div class="col-lg-6 col-12 mb-2 mb-lg-0">
+                        <input type="text" class="form-control" id="price" placeholder="Enchère" name="price">
+                    </div>
+                
+                    <div class="col-lg-6 col-12">
+                        <button class="btn btn-info col-12 raise" data-turbo="true" id="submit-{{auction.id}}" type="submit">{{ "raise"|trans}}</button>
+                    </div>
+                </div>
+            {% else %}
+                <div class="d-flex justify-content-center">
+                    <p><span class="badge bg-danger">cette annonce a été supprimer</span></p>
+                </div>
+            {% endif %}
+        </form>
+        {# <a href="{{ url }}" class="btn btn-danger">acheter</a> #}
+    
+    <div id='info-auction-{{auction.id}}' class="info-success">
+    </div>
+    </div>
+</div>
+{% endif %}

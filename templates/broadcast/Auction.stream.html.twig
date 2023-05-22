@@ -1,0 +1,26 @@
+
+{% block create %}
+    <turbo-stream action="prepend" target="auctions">
+        <template>
+        
+        {% include "components/auction.html.twig" with {'auction' : entity } %}
+         </template>
+    </turbo-stream>
+{% endblock %}
+
+{% block update %}
+    <turbo-stream action="update" target="auction-{{id}}">
+       <template>
+        {% include "components/auction.html.twig" with {'auction' : entity}  %}
+        </template>
+    </turbo-stream>
+{% endblock %}
+
+{% block remove %}
+    <turbo-stream action="update" target="auction-{{id}}">
+        <template>
+            {% include "components/auction.html.twig" with {'auction' : entity ,'remove':true }  %}
+        </template>
+    
+    </turbo-stream>
+{% endblock %}
